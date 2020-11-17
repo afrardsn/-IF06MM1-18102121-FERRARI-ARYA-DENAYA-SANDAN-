@@ -1,4 +1,4 @@
-package com.ferrariarya_18102121.praktikum_6
+package com.ferrariarya_18102121.praktikum_6.adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,6 +7,8 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.ferrariarya_18102121.praktikum_6.MyData
+import com.ferrariarya_18102121.praktikum_6.R
 
 class GridMyDataAdapter(val listMyDatas: ArrayList<MyData>) :
     RecyclerView.Adapter<GridMyDataAdapter.GridViewHolder>() {
