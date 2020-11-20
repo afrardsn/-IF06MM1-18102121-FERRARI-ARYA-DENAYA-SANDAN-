@@ -1,6 +1,7 @@
 package com.ferrariarya_18102121.praktikum_6
 
 import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.os.Parcelable
 import com.google.android.material.appbar.CollapsingToolbarLayout
@@ -36,8 +37,9 @@ class DetailActivity : AppCompatActivity() {
             .into(iv_detail_photo)
 
         findViewById<FloatingActionButton>(R.id.fab).setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
+            val moveWithObjectIntent = Intent(this, MapsActivity::class.java)
+            moveWithObjectIntent.putExtra(MapsActivity.EXTRA_MYDATA, myData)
+            startActivity(moveWithObjectIntent)
         }
     }
 
