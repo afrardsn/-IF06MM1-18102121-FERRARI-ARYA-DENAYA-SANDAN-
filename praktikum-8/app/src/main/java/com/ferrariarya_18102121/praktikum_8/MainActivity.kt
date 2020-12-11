@@ -35,8 +35,9 @@ class MainActivity : AppCompatActivity() {
         if (requestCode == SMS_REQUEST_CODE) {
             when {
                 grantResults[0] == PackageManager.PERMISSION_GRANTED -> Toast.makeText(
-                    this, "Sms receiver permission diterima", Toast.LENGTH_SHORT).show()
-                    else
+                    this, "Sms receiver permission diterima", Toast.LENGTH_SHORT
+                ).show()
+                else
                 -> Toast.makeText(this, "Sms receiver permission ditolak", Toast.LENGTH_SHORT)
                     .show()
             }
