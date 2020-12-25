@@ -1,14 +1,20 @@
 <resources>
     <string name="app_name">Shared Preferences</string>
     <string name="name">Nama</string>
+    <string name="user">Username</string>
+    <string name="pass">Password</string>
     <string name="email">Email</string>
     <string name="phone">Nomor Telp</string>
     <string name="age">Umur</string>
+    <string name="pin">Pin</string>
     <string name="tv_theme">Theme Mode</string>
     <string name="default_name">No Name</string>
+    <string name="default_user">No Username</string>
+    <string name="default_pass">No Password</string>
     <string name="default_email">No Email</string>
     <string name="default_phone">No Phone Number</string>
     <string name="default_age">No Age</string>
+    <string name="default_pin">No Pin</string>
     <string name="default_theme">System Default</string>
     <string name="setting">Setting</string>
     <string name="main_title">Dashboard</string>
@@ -21,7 +27,4 @@
     <string name="field_required">Kolom Tidak Boleh Kosong</string>
     <string name="email_is_not_valid">Email Tidak Valid</string>
     <string name="field_digit_only">Kolom Hanya Untuk Angka</string>
-    <string name="user">Username</string>
-    <string name="pin">Pin</string>
-    <string name="pass">Password</string>
 </resources>
