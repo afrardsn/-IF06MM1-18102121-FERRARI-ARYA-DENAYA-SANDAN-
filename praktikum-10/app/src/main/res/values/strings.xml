@@ -6,4 +6,6 @@
     <string name="date">Date</string>
     <string name="submit">SUBMIT</string>
     <string name="delete">Delete</string>
+    <string name="author">Author</string>
+    <string name="year">Year</string>
 </resources>

@@ -16,6 +16,7 @@ object helper {
         "Musik",
         "Film"
     )
+
     const val EXTRA_QUOTE = "extra_quote"
     const val EXTRA_POSITION = "extra_position"
     const val REQUEST_ADD = 100
@@ -33,13 +34,17 @@ object helper {
                     getInt(getColumnIndexOrThrow(DatabaseContract.QuoteColumns._ID))
                 val title =
                     getString(getColumnIndexOrThrow(DatabaseContract.QuoteColumns.TITLE))
+                val author =
+                    getString(getColumnIndexOrThrow(DatabaseContract.QuoteColumns.AUTHOR))
                 val description =
                     getString(getColumnIndexOrThrow(DatabaseContract.QuoteColumns.DESCRIPTION))
                 val category =
                     getString(getColumnIndexOrThrow(DatabaseContract.QuoteColumns.CATEGORY))
+                val year =
+                    getString(getColumnIndexOrThrow(DatabaseContract.QuoteColumns.YEAR))
                 val date =
                     getString(getColumnIndexOrThrow(DatabaseContract.QuoteColumns.DATE))
-                quotesList.add(Quote(id, title, description, category, date))
+                quotesList.add(Quote(id, title, author, description, category, year, date))
             }
         }
         return quotesList

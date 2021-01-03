@@ -11,12 +11,14 @@ internal class DatabaseHelper(context: Context) : SQLiteOpenHelper(
 ) {
     companion object {
         private const val DATABASE_NAME = "dbquoteapp"
-        private const val DATABASE_VERSION = 1
+        private const val DATABASE_VERSION = 4
         private const val SQL_CREATE_TABLE_QUOTE = "CREATE TABLE $TABLE_QUOTE" +
                 " (${DatabaseContract.QuoteColumns._ID} INTEGER PRIMARY KEY AUTOINCREMENT," +
                 " ${DatabaseContract.QuoteColumns.TITLE} TEXT NOT NULL," +
+                " ${DatabaseContract.QuoteColumns.AUTHOR} TEXT NOT NULL," +
                 " ${DatabaseContract.QuoteColumns.DESCRIPTION} TEXT NOT NULL," +
                 " ${DatabaseContract.QuoteColumns.CATEGORY} TEXT NOT NULL," +
+                " ${DatabaseContract.QuoteColumns.YEAR} TEXT NOT NULL," +
                 " ${DatabaseContract.QuoteColumns.DATE} TEXT NOT NULL)"
     }
 

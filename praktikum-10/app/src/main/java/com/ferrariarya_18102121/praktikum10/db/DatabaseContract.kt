@@ -8,8 +8,10 @@ internal class DatabaseContract {
             const val TABLE_QUOTE = "quote"
             const val _ID = "_id"
             const val TITLE = "title"
+            const val AUTHOR = "author"
             const val DESCRIPTION = "description"
             const val CATEGORY = "category"
+            const val YEAR = "year"
             const val DATE = "date"
         }
     }

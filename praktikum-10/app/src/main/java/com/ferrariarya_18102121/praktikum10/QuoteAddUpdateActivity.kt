@@ -33,12 +33,14 @@ class QuoteAddUpdateActivity : AppCompatActivity(), View.OnClickListener {
     private var quote: Quote? = null
     private var position: Int = 0
     private var category: String = "0"
+    private var year: Int = 0
     private lateinit var quoteHelper: QuoteHelper
     private lateinit var binding: ActivityQuoteAddUpdateBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityQuoteAddUpdateBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
         var spinnerAdapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, categoryList)
         binding.edtCategory.adapter = spinnerAdapter
         binding.edtCategory.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
@@ -55,6 +57,7 @@ class QuoteAddUpdateActivity : AppCompatActivity(), View.OnClickListener {
                 ).show()
             }
         }
+
         quoteHelper = QuoteHelper.getInstance(applicationContext)
         quoteHelper.open()
         quote = intent.getParcelableExtra(EXTRA_QUOTE)
@@ -71,7 +74,9 @@ class QuoteAddUpdateActivity : AppCompatActivity(), View.OnClickListener {
             btnTitle = "Update"
             quote?.let {
                 binding.edtTitle.setText(it.title)
+                binding.edtAuthor.setText(it.author)
                 binding.edtDescription.setText(it.description)
+                binding.edtYear.setText(it.year)
                 binding.edtCategory.setSelection(it.category!!.toInt())
             }!!
         } else {
@@ -87,21 +92,27 @@ class QuoteAddUpdateActivity : AppCompatActivity(), View.OnClickListener {
     override fun onClick(view: View) {
         if (view.id == R.id.btn_submit) {
             val title = binding.edtTitle.text.toString().trim()
+            val author = binding.edtAuthor.text.toString().trim()
             val description = binding.edtDescription.text.toString().trim()
+            val year = binding.edtYear.text.toString().trim()
             if (title.isEmpty()) {
                 binding.edtTitle.error = "Field can not be blank"
                 return
             }
             quote?.title = title
+            quote?.author =  author
             quote?.description = description
             quote?.category = category
+            quote?.year = year
             val intent = Intent()
             intent.putExtra(EXTRA_QUOTE, quote)
             intent.putExtra(EXTRA_POSITION, position)
             val values = ContentValues()
             values.put(DatabaseContract.QuoteColumns.TITLE, title)
+            values.put(DatabaseContract.QuoteColumns.AUTHOR, author)
             values.put(DatabaseContract.QuoteColumns.DESCRIPTION, description)
             values.put(DatabaseContract.QuoteColumns.CATEGORY, category)
+            values.put(DatabaseContract.QuoteColumns.YEAR, year)
             if (isEdit) {
                 val result = quoteHelper.update(
                     quote?.id.toString(),
