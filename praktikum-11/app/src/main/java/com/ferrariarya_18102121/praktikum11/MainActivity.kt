@@ -8,6 +8,9 @@ import android.view.View
 import android.widget.Toast
 import androidx.core.view.isVisible
 import com.ferrariarya_18102121.praktikum11.databinding.ActivityMainBinding
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
@@ -16,11 +19,17 @@ import com.google.firebase.ktx.Firebase
 class MainActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var auth: FirebaseAuth
     private lateinit var binding: ActivityMainBinding
+    private lateinit var googleSignInClient: GoogleSignInClient
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         auth = Firebase.auth
+        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken(getString(R.string.default_web_client_id))
+            .requestEmail()
+            .build()
+        googleSignInClient = GoogleSignIn.getClient(this, gso)
         binding.btnSignOut.setOnClickListener(this)
         binding.btnEmailVerify.setOnClickListener(this)
 
@@ -29,8 +38,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             val intent = Intent(this@MainActivity, SignInActivity::class.java)
             startActivity(intent)
             finish()
-        }
-        else{
+        } else {
             updateUI(currentUser)
         }
     }
@@ -42,8 +50,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             val intent = Intent(this@MainActivity, SignInActivity::class.java)
             startActivity(intent)
             finish()
-        }
-        else{
+        } else {
             updateUI(currentUser)
         }
     }
@@ -66,16 +73,21 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             .addOnCompleteListener(this) { task ->
                 binding.btnEmailVerify.isEnabled = true
                 if (task.isSuccessful) {
-                    Toast.makeText(baseContext,
+                    Toast.makeText(
+                        baseContext,
                         "Verification email sent to ${user.email} ",
-                        Toast.LENGTH_SHORT).show()
+                        Toast.LENGTH_SHORT
+                    ).show()
                 } else {
-                    Toast.makeText(baseContext,
+                    Toast.makeText(
+                        baseContext,
                         "Failed to send verification email.",
-                        Toast.LENGTH_SHORT).show()
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
     }
+
     private fun signOut() {
         auth.signOut()
         val currentUser = auth.currentUser
@@ -83,6 +95,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             val intent = Intent(this@MainActivity, SignInActivity::class.java)
             startActivity(intent)
             finish()
+        }
+        googleSignInClient.signOut().addOnCompleteListener(this) {
         }
     }
 
@@ -95,16 +109,16 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             val emailVerified = currentUser.isEmailVerified
             val uid = currentUser.uid
             binding.tvName.text = name
-            if(TextUtils.isEmpty(name)){
+            if (TextUtils.isEmpty(name)) {
                 binding.tvName.text = "No Name"
             }
             binding.tvUserId.text = email
             for (profile in it.providerData) {
                 val providerId = profile.providerId
-                if(providerId=="password" && emailVerified==true){
+                if (providerId == "password" && emailVerified == true) {
                     binding.btnEmailVerify.isVisible = false
                 }
-                if(providerId=="phone"){
+                if (providerId == "phone") {
                     binding.tvName.text = phoneNumber
                     binding.tvUserId.text = providerId
                 }
