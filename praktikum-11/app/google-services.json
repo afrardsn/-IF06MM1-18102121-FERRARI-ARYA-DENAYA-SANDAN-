@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1017602407687",
+    "project_id": "fir-ppb2021-73325",
+    "storage_bucket": "fir-ppb2021-73325.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1017602407687:android:70765d9fe58c37dca019a2",
+        "android_client_info": {
+          "package_name": "com.ferrariarya_18102121.praktikum11"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1017602407687-7k4hducqrfkhvlre8p8mm44qjuh7o3pg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAMIrNi8sKoTji1JWaJIiY1C_JORxYJdwE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1017602407687-7k4hducqrfkhvlre8p8mm44qjuh7o3pg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
