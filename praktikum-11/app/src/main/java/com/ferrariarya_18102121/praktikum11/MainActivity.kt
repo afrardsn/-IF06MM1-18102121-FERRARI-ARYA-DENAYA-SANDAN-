@@ -7,6 +7,8 @@ import android.text.TextUtils
 import android.view.View
 import android.widget.Toast
 import androidx.core.view.isVisible
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.ferrariarya_18102121.praktikum11.databinding.ActivityMainBinding
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -15,6 +17,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var auth: FirebaseAuth
@@ -108,6 +111,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             val photoUrl = currentUser.photoUrl
             val emailVerified = currentUser.isEmailVerified
             val uid = currentUser.uid
+            Glide.with(this).load(photoUrl).circleCrop().into(binding.ivImage)
             binding.tvName.text = name
             if (TextUtils.isEmpty(name)) {
                 binding.tvName.text = "No Name"
