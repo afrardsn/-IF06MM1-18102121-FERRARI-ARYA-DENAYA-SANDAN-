@@ -35,6 +35,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         googleSignInClient = GoogleSignIn.getClient(this, gso)
         binding.btnSignOut.setOnClickListener(this)
         binding.btnEmailVerify.setOnClickListener(this)
+        binding.btnDasboardQuotes.setOnClickListener(this)
+
 
         val currentUser = auth.currentUser
         if (currentUser == null) {
@@ -65,6 +67,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             }
             R.id.btnEmailVerify -> {
                 sendEmailVerification()
+            }
+            R.id.btnDasboardQuotes -> {
+                val intent = Intent(this@MainActivity, DashboardQuoteActivity::class.java)
+                startActivity(intent)
             }
         }
     }
