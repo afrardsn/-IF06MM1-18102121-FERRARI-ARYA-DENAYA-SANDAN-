@@ -1,7 +1,9 @@
 package com.ferrariarya_18102121.praktikum11
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -16,6 +18,7 @@ import com.ferrariarya_18102121.praktikum11.helper.ALERT_DIALOG_DELETE
 import com.ferrariarya_18102121.praktikum11.helper.EXTRA_POSITION
 import com.ferrariarya_18102121.praktikum11.helper.EXTRA_QUOTE
 import com.ferrariarya_18102121.praktikum11.helper.RESULT_ADD
+import com.ferrariarya_18102121.praktikum11.helper.RESULT_DELETE
 import com.ferrariarya_18102121.praktikum11.helper.RESULT_UPDATE
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -143,7 +146,11 @@ class QuoteAddUpdateActivity : AppCompatActivity(), View.OnClickListener {
                         finish()
                     }
                     .addOnFailureListener { e ->
-                        Toast.makeText(this@QuoteAddUpdateActivity, "Gagal mengupdate data", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                            this@QuoteAddUpdateActivity,
+                            "Gagal mengupdate data",
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
 
             } else {
@@ -215,6 +222,26 @@ class QuoteAddUpdateActivity : AppCompatActivity(), View.OnClickListener {
                 if (isDialogClose) {
                     finish()
                 } else {
+                    firestore.collection("quotes").document(quote?.id.toString())
+                        .delete()
+                        .addOnSuccessListener {
+                            Log.d(
+                                "delete",
+                                "DocumentSnapshot successfully deleted!" + quote?.id.toString()
+                            )
+                            val intent = Intent()
+                            intent.putExtra(EXTRA_POSITION, position)
+                            setResult(RESULT_DELETE, intent)
+                            finish()
+                        }
+                        .addOnFailureListener { e ->
+                            Log.w("a", "Error deleting document", e)
+                            Toast.makeText(
+                                this@QuoteAddUpdateActivity,
+                                "Gagal menghapus data",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
 
                 }
             }
