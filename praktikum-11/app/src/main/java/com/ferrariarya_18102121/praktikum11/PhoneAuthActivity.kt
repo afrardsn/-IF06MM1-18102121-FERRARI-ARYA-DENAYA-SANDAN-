@@ -37,13 +37,16 @@ class PhoneAuthActivity : AppCompatActivity(), View.OnClickListener {
                 verificationInProgress = false
                 signInWithPhoneAuthCredential(credential)
             }
+
             override fun onVerificationFailed(e: FirebaseException) {
                 verificationInProgress = false
                 if (e is FirebaseAuthInvalidCredentialsException) {
                     binding.inputNumber.error = "Invalid phone number."
                 } else if (e is FirebaseTooManyRequestsException) {
-                    Snackbar.make(findViewById(android.R.id.content), "Quota exceeded.",
-                        Snackbar.LENGTH_SHORT).show()
+                    Snackbar.make(
+                        findViewById(android.R.id.content), "Quota exceeded.",
+                        Snackbar.LENGTH_SHORT
+                    ).show()
                 }
             }
 
@@ -90,7 +93,10 @@ class PhoneAuthActivity : AppCompatActivity(), View.OnClickListener {
                 }
                 verifyPhoneNumberWithCode(storedVerificationId, code)
             }
-            R.id.btnResend -> resendVerificationCode(prefixPhoneNumber + binding.inputNumber.text.toString(), resendToken)
+            R.id.btnResend -> resendVerificationCode(
+                prefixPhoneNumber + binding.inputNumber.text.toString(),
+                resendToken
+            )
         }
     }
 

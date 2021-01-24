@@ -25,8 +25,10 @@ class SignUpActivity : AppCompatActivity(), View.OnClickListener {
     override fun onClick(v: View) {
         when (v.id) {
             R.id.btnCreateAccount -> {
-                createAccount(binding.inputEmail.text.toString(),
-                    binding.inputPassword.text.toString())
+                createAccount(
+                    binding.inputEmail.text.toString(),
+                    binding.inputPassword.text.toString()
+                )
             }
         }
     }
@@ -38,12 +40,16 @@ class SignUpActivity : AppCompatActivity(), View.OnClickListener {
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
-                    Toast.makeText(baseContext, "Create User Success.",
-                        Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        baseContext, "Create User Success.",
+                        Toast.LENGTH_SHORT
+                    ).show()
                     finish()
                 } else {
-                    Toast.makeText(baseContext, "Authentication failed.",
-                        Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        baseContext, "Authentication failed.",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
     }

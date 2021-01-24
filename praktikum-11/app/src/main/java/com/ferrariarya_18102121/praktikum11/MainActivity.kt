@@ -85,13 +85,17 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             .addOnCompleteListener(this) { task ->
                 binding.btnEmailVerify.isEnabled = true
                 if (task.isSuccessful) {
-                    Toast.makeText(baseContext,
+                    Toast.makeText(
+                        baseContext,
                         "Verification email sent to ${user.email} ",
-                        Toast.LENGTH_SHORT).show()
+                        Toast.LENGTH_SHORT
+                    ).show()
                 } else {
-                    Toast.makeText(baseContext,
+                    Toast.makeText(
+                        baseContext,
                         "Failed to send verification email.",
-                        Toast.LENGTH_SHORT).show()
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
     }

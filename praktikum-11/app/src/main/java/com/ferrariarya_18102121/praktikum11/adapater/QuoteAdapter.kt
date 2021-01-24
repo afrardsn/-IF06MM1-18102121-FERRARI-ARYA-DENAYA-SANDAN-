@@ -17,7 +17,8 @@ import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
-class QuoteAdapter(private val activity: Activity): RecyclerView.Adapter<QuoteAdapter.QuoteViewHolder>() {
+class QuoteAdapter(private val activity: Activity) :
+    RecyclerView.Adapter<QuoteAdapter.QuoteViewHolder>() {
     var listQuotes = ArrayList<Quote>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): QuoteViewHolder {
@@ -27,7 +28,7 @@ class QuoteAdapter(private val activity: Activity): RecyclerView.Adapter<QuoteAd
 
     override fun getItemCount(): Int = this.listQuotes.size
     override fun onBindViewHolder(holder: QuoteViewHolder, position: Int) {
-        holder.bind(listQuotes[position],position)
+        holder.bind(listQuotes[position], position)
     }
 
     inner class QuoteViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -43,7 +44,7 @@ class QuoteAdapter(private val activity: Activity): RecyclerView.Adapter<QuoteAd
             binding.tvItemDate.text = date
             binding.tvItemDescription.text = quote.description
 
-            binding.cvItemQuote.setOnClickListener{
+            binding.cvItemQuote.setOnClickListener {
                 val intent = Intent(activity, QuoteAddUpdateActivity::class.java)
                 intent.putExtra(EXTRA_POSITION, position)
                 intent.putExtra(EXTRA_QUOTE, quote)

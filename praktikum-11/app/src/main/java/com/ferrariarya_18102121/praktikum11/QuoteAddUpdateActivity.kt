@@ -95,13 +95,18 @@ class QuoteAddUpdateActivity : AppCompatActivity(), View.OnClickListener {
                 setCategories(categoriesSpinnerArray)
             }
             .addOnFailureListener { exception ->
-                Toast.makeText(this@QuoteAddUpdateActivity, "Categories cannot be retrieved ", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    this@QuoteAddUpdateActivity,
+                    "Categories cannot be retrieved ",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         return categoriesSpinnerArray
     }
 
     private fun setCategories(paymentMethodSpinnerAarray: ArrayList<String>) {
-        var spinnerAdapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, paymentMethodSpinnerAarray)
+        var spinnerAdapter =
+            ArrayAdapter(this, android.R.layout.simple_list_item_1, paymentMethodSpinnerAarray)
         binding.edtCategory.adapter = spinnerAdapter
         binding.edtCategory.setSelection(categorySelection)
         binding.edtCategory.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
