@@ -29,8 +29,7 @@ import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_quote_add_update.*
 
 class QuoteAddUpdateActivity : AppCompatActivity(), View.OnClickListener {
-    private lateinit var auth: FirebaseAuth
-    private lateinit var firestore: FirebaseFirestore
+
     private var isEdit = false
     private var categoriesSpinnerArray = ArrayList<String>()
     private var quote: Quote? = null
@@ -38,6 +37,9 @@ class QuoteAddUpdateActivity : AppCompatActivity(), View.OnClickListener {
     private var categorySelection: Int = 0
     private var categoryName: String = "0"
     private lateinit var binding: ActivityQuoteAddUpdateBinding
+    private lateinit var auth: FirebaseAuth
+    private lateinit var firestore: FirebaseFirestore
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityQuoteAddUpdateBinding.inflate(layoutInflater)
@@ -93,19 +95,13 @@ class QuoteAddUpdateActivity : AppCompatActivity(), View.OnClickListener {
                 setCategories(categoriesSpinnerArray)
             }
             .addOnFailureListener { exception ->
-                Toast.makeText(
-                    this@QuoteAddUpdateActivity,
-                    "Categories cannot be retrieved ",
-                    Toast.LENGTH_SHORT
-                ).show()
+                Toast.makeText(this@QuoteAddUpdateActivity, "Categories cannot be retrieved ", Toast.LENGTH_SHORT).show()
             }
-
         return categoriesSpinnerArray
     }
 
     private fun setCategories(paymentMethodSpinnerAarray: ArrayList<String>) {
-        var spinnerAdapter =
-            ArrayAdapter(this, android.R.layout.simple_list_item_1, paymentMethodSpinnerAarray)
+        var spinnerAdapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, paymentMethodSpinnerAarray)
         binding.edtCategory.adapter = spinnerAdapter
         binding.edtCategory.setSelection(categorySelection)
         binding.edtCategory.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {

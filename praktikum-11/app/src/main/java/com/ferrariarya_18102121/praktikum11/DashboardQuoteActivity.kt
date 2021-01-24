@@ -77,6 +77,7 @@ class DashboardQuoteActivity : AppCompatActivity() {
                         adapter.listQuotes = quotesList
                     } else {
                         adapter.listQuotes = ArrayList()
+                        binding.rvQuotes?.adapter?.notifyDataSetChanged()
                         showSnackbarMessage("Tidak ada data saat ini")
                     }
                 }

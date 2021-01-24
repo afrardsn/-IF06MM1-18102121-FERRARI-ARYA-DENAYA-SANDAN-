@@ -23,11 +23,14 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var auth: FirebaseAuth
     private lateinit var binding: ActivityMainBinding
     private lateinit var googleSignInClient: GoogleSignInClient
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         auth = Firebase.auth
+        binding.btnEmailVerify.isVisible = false
+
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(getString(R.string.default_web_client_id))
             .requestEmail()
@@ -82,17 +85,13 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             .addOnCompleteListener(this) { task ->
                 binding.btnEmailVerify.isEnabled = true
                 if (task.isSuccessful) {
-                    Toast.makeText(
-                        baseContext,
+                    Toast.makeText(baseContext,
                         "Verification email sent to ${user.email} ",
-                        Toast.LENGTH_SHORT
-                    ).show()
+                        Toast.LENGTH_SHORT).show()
                 } else {
-                    Toast.makeText(
-                        baseContext,
+                    Toast.makeText(baseContext,
                         "Failed to send verification email.",
-                        Toast.LENGTH_SHORT
-                    ).show()
+                        Toast.LENGTH_SHORT).show()
                 }
             }
     }
@@ -125,8 +124,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             binding.tvUserId.text = email
             for (profile in it.providerData) {
                 val providerId = profile.providerId
-                if (providerId == "password" && emailVerified == true) {
-                    binding.btnEmailVerify.isVisible = false
+                if (providerId == "password" && emailVerified == false) {
+                    binding.btnEmailVerify.isVisible = true
                 }
                 if (providerId == "phone") {
                     binding.tvName.text = phoneNumber
