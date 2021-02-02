@@ -1,4 +1,4 @@
-package com.ferrariarya_18102121.praktikum14.ui.notifications
+package com.ferrariarya_18102121.praktikum14.ui.globalquotes
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
