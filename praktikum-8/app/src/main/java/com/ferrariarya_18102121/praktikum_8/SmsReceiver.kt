@@ -10,6 +10,7 @@ import android.util.Log
 
 class SmsReceiver : BroadcastReceiver() {
     private val TAG = SmsReceiver::class.java.simpleName
+
     override fun onReceive(context: Context, intent: Intent) {
         val bundle = intent.extras
         try {
@@ -40,5 +41,4 @@ class SmsReceiver : BroadcastReceiver() {
         } else currentSMS = SmsMessage.createFromPdu(aObject as ByteArray)
         return currentSMS
     }
-
 }
