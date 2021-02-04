@@ -1,22 +1,19 @@
 package com.ferrariarya_18102121.praktikum14.ui.myquotes
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.ferrariarya_18102121.praktikum14.CoroutineContextProvider
-import com.ferrariarya_18102121.praktikum14.QuoteAdapter
-import com.ferrariarya_18102121.praktikum14.R
+import com.ferrariarya_18102121.praktikum14.*
 import com.ferrariarya_18102121.praktikum14.TokenPref
 import com.ferrariarya_18102121.praktikum14.`interface`.MainView
 import com.ferrariarya_18102121.praktikum14.api.MainPresenter
 import com.ferrariarya_18102121.praktikum14.databinding.FragmentMyQuotesBinding
+import com.ferrariarya_18102121.praktikum14.helper.REQUEST_ADD
 import com.ferrariarya_18102121.praktikum14.model.Login
 import com.ferrariarya_18102121.praktikum14.model.Quote
 import com.ferrariarya_18102121.praktikum14.model.Token
@@ -47,6 +44,11 @@ class MyQuotesFragment : Fragment(), MainView {
             MainPresenter(this, CoroutineContextProvider())
         progressbar.visibility = View.VISIBLE
         presenter.getMyQuotes(token.token)
+        binding.fab.setOnClickListener {
+            val intent = Intent(requireActivity(), QuoteAddUpdateActivity::class.java)
+            startActivityForResult(intent, REQUEST_ADD)
+        }
+
         swiperefresh.onRefresh {
             progressbar.visibility = View.INVISIBLE
             presenter.getMyQuotes(token.token)
