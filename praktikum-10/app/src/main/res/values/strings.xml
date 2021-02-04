@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">SQLite</string>
+    <string name="title">Title</string>
+    <string name="category">Category</string>
+    <string name="description">Description</string>
+    <string name="date">Date</string>
+    <string name="submit">SUBMIT</string>
+    <string name="delete">Delete</string>
+    <string name="author">Author</string>
+    <string name="year">Year</string>
+</resources>
